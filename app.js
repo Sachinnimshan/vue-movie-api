@@ -39,7 +39,7 @@ if(process.env.NODE_ENV === "production"){
     const __dirname = path.dirname(fileURLToPath(import.meta.url));
     app.use(express.static(path.join(__dirname ,'dist')));
     app.get("*",(req,res)=>{
-        res.sendFile(__dirname + "/dist/index.html");
+        res.sendFile(__dirname + "index.html");
     });
 }
 
