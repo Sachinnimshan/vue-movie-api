@@ -19,6 +19,7 @@ app.use(express.static("uploads"));
 
 
 const PORT = process.env.SERVER_PORT || 5000;
+const HOST = process.env.HOST;
 const CONNECTION_URL = process.env.DB_CONN;
 
 
@@ -43,7 +44,7 @@ if(process.env.NODE_ENV === "production"){
     });
 }
 
-app.listen(PORT, ()=> console.log(`Server Started at ${PORT}`));
+app.listen(PORT, HOST,()=> console.log(`Server Started at ${PORT}`));
 
 app.get('/',(req,res)=>{
     res.send("Server is Ready");
