@@ -24,8 +24,10 @@ mongoose.connect( CONNECTION_URL, {
     useCreateIndex : true,
     
 })
-.then(()=> {app.listen(PORT, ()=>{console.log(`Database Connected & Server Started at ${PORT}`)})})
+.then(()=> console.log("Database Connected Successfully"))
 .catch((error)=> { console.log(error)});
+
+app.listen(PORT, ()=> console.log(`Server Started at ${PORT}`));
 
 app.use('/posts', postRouter);
 
