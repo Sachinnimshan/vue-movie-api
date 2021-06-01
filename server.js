@@ -2,6 +2,9 @@ import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 
 import postRouter from './routes/postRouter.js';
 
@@ -9,6 +12,7 @@ import postRouter from './routes/postRouter.js';
 dotenv.config();
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static("uploads"));
@@ -27,16 +31,19 @@ mongoose.connect( CONNECTION_URL, {
 .then(()=> console.log("Database Connected Successfully"))
 .catch((error)=> { console.log(error)});
 
-app.listen(PORT, ()=> console.log(`Server Started at ${PORT}`));
+
 
 app.use('/posts', postRouter);
 
 if(process.env.NODE_ENV === "production"){
-    app.use(express.static(__dirname+"/dist/"));
+    const __dirname = path.dirname(fileURLToPath(import.meta.url));
+    app.use(express.static(path.join(__dirname ,'dist')));
     app.get("*",(req,res)=>{
         res.sendFile(__dirname + "/dist/index.html");
     });
 }
+
+app.listen(PORT, ()=> console.log(`Server Started at ${PORT}`));
 
 app.get('/',(req,res)=>{
     res.send("Server is Ready");
