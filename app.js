@@ -44,7 +44,7 @@ if(process.env.NODE_ENV === "production"){
     });
 }
 
-app.listen(PORT, HOST,()=> console.log(`Server Started at ${PORT}`));
+app.listen(PORT, ()=> console.log(`Server Started at ${PORT}`));
 
 app.get('/',(req,res)=>{
     res.send("Server is Ready");
