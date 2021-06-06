@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import http from 'http';
 
 
 import postRouter from './routes/postRouter.js';
@@ -22,6 +23,7 @@ const PORT = process.env.SERVER_PORT || 5000;
 const HOST = process.env.HOST;
 const CONNECTION_URL = process.env.DB_CONN;
 
+const server = http.createServer(app);
 
 mongoose.connect( CONNECTION_URL, {
     useNewUrlParser : true,
@@ -44,7 +46,7 @@ if(process.env.NODE_ENV === "production"){
     });
 }
 
-app.listen(PORT, ()=> console.log(`Server Started at ${PORT}`));
+server.listen(PORT, ()=> console.log(`Server Started at ${PORT}`));
 
 app.get('/',(req,res)=>{
     res.send("Server is Ready");
