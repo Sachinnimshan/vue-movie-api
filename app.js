@@ -41,9 +41,9 @@ app.use('/posts', postRouter);
 if(process.env.NODE_ENV === "production"){
     const __dirname = path.dirname(fileURLToPath(import.meta.url));
     app.use(express.static(path.join(__dirname ,'dist')));
-    app.get("*",(req,res)=>{
-        res.sendFile(__dirname + "dist/index.html");
-    });
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+      });
 }
 
 server.listen(PORT, ()=> console.log(`Server Started at ${PORT}`));
