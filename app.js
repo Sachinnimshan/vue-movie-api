@@ -19,7 +19,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static("uploads"));
 
 
-const PORT = process.env.SERVER_PORT || 5000;
+const PORT = process.env.PORT || 5000;
 const HOST = process.env.HOST;
 const CONNECTION_URL = process.env.DB_CONN;
 
